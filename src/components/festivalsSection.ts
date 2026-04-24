@@ -18,7 +18,7 @@ const FESTIVALS: Festival[] = [
     nameEnglish: 'Chaitra Navratri',
     month: 'Chaitra',
     dateRange: 'Mar–Apr (9 days)',
-    description: 'Spring Navratri celebration marking the Maithili New Year with special rituals and Mithila cultural programs.',
+    description: 'Spring Navratri celebration marking the Mithila New Year with special rituals and Mithila cultural programs.',
     isMain: true,
   },
   {
@@ -28,7 +28,7 @@ const FESTIVALS: Festival[] = [
     nameEnglish: 'Durga Puja',
     month: 'Ashwin',
     dateRange: 'Oct (5 days)',
-    description: 'Saptami to Dashami — the heart of Maithili celebration, with elaborate decoration, Mithila painting exhibitions, and processions.',
+    description: 'Saptami to Dashami — the heart of Mithila celebration, with elaborate decoration, Mithila painting exhibitions, and processions.',
     isMain: true,
   },
   {
@@ -38,7 +38,7 @@ const FESTIVALS: Festival[] = [
     nameEnglish: 'Sama Chakeva',
     month: 'Kartika',
     dateRange: 'Nov (7 days)',
-    description: 'A unique Maithili folk festival celebrating the bond between siblings — featuring clay figurines and traditional songs.',
+    description: 'A unique Mithila folk festival celebrating the bond between siblings — featuring clay figurines and traditional songs.',
     isMain: false,
   },
   {
@@ -68,7 +68,7 @@ const FESTIVALS: Festival[] = [
     nameEnglish: 'Madhushravani',
     month: 'Shravana',
     dateRange: 'Jul–Aug (13 days)',
-    description: 'A Maithili bridal festival where newly married women worship Lord Shiva and Goddess Parvati with Mithila rituals.',
+    description: 'A Mithila bridal festival where newly married women worship Lord Shiva and Goddess Parvati with Mithila rituals.',
     isMain: false,
   },
   {
