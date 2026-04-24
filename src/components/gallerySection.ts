@@ -11,7 +11,6 @@ const GALLERY_ITEMS: GalleryItem[] = [
 ];
 
 function buildArtForTheme(item: GalleryItem): string {
-  const bg = item.colors[0];
   switch (item.theme) {
     case 'durga':        return createDurgaArt();
     case 'lotus':        return createLotusArt();
@@ -19,7 +18,6 @@ function buildArtForTheme(item: GalleryItem): string {
     case 'fish':         return buildFishPanel(item.colors);
     case 'kohbar':       return buildKohbarArt(item.colors);
     case 'sun-moon':     return buildSunMoonArt();
-    default:             return `<div style="background:${bg};width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:3rem;">🎨</div>`;
   }
 }
 
@@ -106,4 +104,13 @@ export function initGallerySection(): void {
   const grid = document.getElementById('galleryGrid');
   if (!grid) return;
   grid.innerHTML = GALLERY_ITEMS.map(renderCard).join('');
+
+  grid.addEventListener('keydown', (e: KeyboardEvent) => {
+    if (e.key !== 'Enter' && e.key !== ' ') return;
+    const card = (e.target as Element).closest<HTMLElement>('.gallery-card');
+    if (card) {
+      e.preventDefault();
+      card.click();
+    }
+  });
 }

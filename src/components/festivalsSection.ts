@@ -56,7 +56,7 @@ const FESTIVALS: Festival[] = [
     icon: '💐',
     nameHindi: 'विवाह पञ्चमी',
     nameEnglish: 'Vivah Panchami',
-    month: 'Magha',
+    month: 'Margashirsha',
     dateRange: 'Dec (1 day)',
     description: 'Celebrates the divine marriage of Lord Ram and Sita — with great significance in Mithila as Sita is the daughter of Mithila.',
     isMain: false,
