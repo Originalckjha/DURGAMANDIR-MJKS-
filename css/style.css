@@ -162,6 +162,8 @@ img { display: block; max-width: 100%; }
 }
 .nav-link:hover { color: var(--red); }
 .nav-link:hover::after { left: 8px; right: 8px; }
+.nav-link.active { color: var(--red); }
+.nav-link.active::after { left: 8px; right: 8px; }
 .hamburger {
   display: none;
   flex-direction: column;
@@ -396,6 +398,11 @@ img { display: block; max-width: 100%; }
   border-top: 6px solid var(--red);
 }
 .festival-card:hover { transform: translateY(-4px); box-shadow: 0 10px 30px rgba(181,18,27,0.18); }
+.festival-main {
+  border-top-color: var(--gold);
+  background: linear-gradient(135deg, var(--white) 85%, rgba(212,160,23,0.08) 100%);
+  box-shadow: 0 4px 24px rgba(212,160,23,0.18);
+}
 .festival-icon { font-size: 2.4rem; margin-bottom: 10px; }
 .festival-name { font-family: var(--font-devanagari); font-size: 1.15rem; color: var(--deep-red); margin-bottom: 6px; }
 .festival-date { font-size: 0.85rem; color: var(--gold); font-weight: 600; margin-bottom: 8px; }

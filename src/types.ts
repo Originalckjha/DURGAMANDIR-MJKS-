@@ -13,7 +13,6 @@ export type MithilaTheme =
   | 'durga'
   | 'lotus'
   | 'fish'
-  | 'peacock'
   | 'tree-of-life'
   | 'sun-moon'
   | 'kohbar';
@@ -30,8 +29,8 @@ export interface GalleryItem {
 // ── Festival ──────────────────────────────────────────────────
 export type FestivalMonth =
   | 'Chaitra' | 'Vaishakha' | 'Ashadha' | 'Shravana'
-  | 'Bhadrapada' | 'Ashwin' | 'Kartika' | 'Pausha'
-  | 'Magha' | 'Phalguna';
+  | 'Bhadrapada' | 'Ashwin' | 'Kartika' | 'Margashirsha'
+  | 'Pausha' | 'Magha' | 'Phalguna';
 
 export interface Festival {
   id: string;
@@ -79,9 +78,6 @@ export interface SvgPaletteConfig {
 }
 
 export interface FishMotif {
-  x: number;
-  y: number;
-  scale: number;
   color: string;
   flip: boolean;
 }

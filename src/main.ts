@@ -26,16 +26,6 @@ function initScrollAnimations(): void {
   document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 }
 
-function initSmoothScroll(): void {
-  document.querySelectorAll<HTMLAnchorElement>('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', e => {
-      e.preventDefault();
-      const target = document.querySelector(anchor.getAttribute('href') ?? '');
-      target?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    });
-  });
-}
-
 function initBackToTop(): void {
   const btn = document.createElement('button');
   btn.id = 'backToTop';
@@ -53,20 +43,20 @@ function initBackToTop(): void {
   `;
   document.body.appendChild(btn);
 
+  let rafPending = false;
   window.addEventListener('scroll', () => {
-    const visible = window.scrollY > 400;
-    btn.style.opacity  = visible ? '1' : '0';
-    btn.style.transform = visible ? 'scale(1)' : 'scale(0.8)';
-    btn.style.pointerEvents = visible ? 'auto' : 'none';
+    if (rafPending) return;
+    rafPending = true;
+    requestAnimationFrame(() => {
+      rafPending = false;
+      const visible = window.scrollY > 400;
+      btn.style.opacity = visible ? '1' : '0';
+      btn.style.transform = visible ? 'scale(1)' : 'scale(0.8)';
+      btn.style.pointerEvents = visible ? 'auto' : 'none';
+    });
   });
 
   btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-}
-
-function initNavActiveStyle(): void {
-  const style = document.createElement('style');
-  style.textContent = `.nav-link.active { color: #B5121B; } .nav-link.active::after { left:8px; right:8px; }`;
-  document.head.appendChild(style);
 }
 
 function initPageLoader(): void {
@@ -115,7 +105,6 @@ function initHeroLotusDecor(): void {
 document.addEventListener('DOMContentLoaded', () => {
   initPageLoader();
   initNav();
-  initNavActiveStyle();
   initAboutArt();
   renderFishRow('fishRow', 7);
   initPujaSection();
@@ -124,7 +113,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initSamitiSection();
   initContactSection();
   initHeroLotusDecor();
-  initSmoothScroll();
   initBackToTop();
 
   // scroll animations run after a tick so elements are painted first

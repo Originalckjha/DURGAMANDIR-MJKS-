@@ -27,7 +27,6 @@ export function renderFishRow(containerId: string, count = 6): void {
   if (!el) return;
   const colors = [PALETTE.primary, PALETTE.secondary, PALETTE.accent, '#1A3A6B', '#E8650A'];
   const fishes: FishMotif[] = Array.from({ length: count }, (_, i) => ({
-    x: 0, y: 0, scale: 1,
     color: colors[i % colors.length],
     flip: i % 2 === 1,
   }));
