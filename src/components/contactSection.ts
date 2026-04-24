@@ -5,7 +5,7 @@ const CONTACT_DETAILS: ContactDetail[] = [
     id: 'address',
     icon: '📍',
     heading: 'Temple Address',
-    lines: ['मैथिली दुर्गामंदिर', 'Maithila Jan Kalyan Samiti', 'Mithila Region, Bihar, India'],
+    lines: ['मिथिला दुर्गामंदिर', 'Maithila Jan Kalyan Samiti', 'Mithila Region, Bihar, India'],
   },
   {
     id: 'phone',

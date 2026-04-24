@@ -21,6 +21,7 @@
   --font-devanagari: 'Tiro Devanagari Hindi', serif;
   --font-display:    'Cinzel Decorative', serif;
   --font-body:       'Crimson Text', Georgia, serif;
+  --font-tirhuta:    'Noto Serif Tirhuta', serif;
 
   --shadow: 0 4px 24px rgba(181,18,27,0.15);
   --radius: 8px;
@@ -135,6 +136,13 @@ img { display: block; max-width: 100%; }
   color: var(--deep-red);
   line-height: 1.2;
 }
+.logo-tirhuta {
+  font-family: var(--font-tirhuta);
+  font-size: 0.88rem;
+  color: var(--deep-red);
+  letter-spacing: 0.05em;
+  line-height: 1.4;
+}
 .logo-subtitle {
   font-size: 0.75rem;
   color: var(--green);
@@ -204,9 +212,17 @@ img { display: block; max-width: 100%; }
   font-family: var(--font-devanagari);
   font-size: 1.05rem;
   color: var(--deep-red);
-  margin-bottom: 20px;
+  margin-bottom: 12px;
   font-style: italic;
   opacity: 0.9;
+}
+.hero-tirhuta {
+  font-family: var(--font-tirhuta);
+  font-size: clamp(1.1rem, 2.2vw, 1.6rem);
+  color: var(--deep-red);
+  margin-bottom: 10px;
+  opacity: 0.8;
+  letter-spacing: 0.06em;
 }
 .hero-title {
   font-family: var(--font-devanagari);
@@ -504,7 +520,8 @@ img { display: block; max-width: 100%; }
   gap: 40px;
   margin-bottom: 40px;
 }
-.footer-logo { font-family: var(--font-devanagari); font-size: 1.3rem; color: var(--bright-gold); margin-bottom: 10px; }
+.footer-logo { font-family: var(--font-devanagari); font-size: 1.3rem; color: var(--bright-gold); margin-bottom: 6px; }
+.footer-tirhuta { font-family: var(--font-tirhuta); font-size: 0.95rem; color: var(--gold); margin-bottom: 8px; opacity: 0.85; }
 .footer-brand p { font-size: 0.9rem; opacity: 0.75; line-height: 1.6; }
 .footer-mantra { font-family: var(--font-devanagari); color: var(--gold); font-size: 1.1rem; margin-top: 10px !important; }
 .footer-links h4,
