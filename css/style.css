@@ -722,18 +722,31 @@ img { display: block; max-width: 100%; }
   border: 0;
   display: block;
 }
-.map-link {
-  display: block;
-  text-align: right;
-  padding: 6px 12px;
+.map-footer {
   background: var(--light-cream);
-  font-size: 0.82rem;
-  font-weight: 600;
-  color: var(--red);
-  text-decoration: underline;
-  text-underline-offset: 2px;
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
 }
-.map-link:hover { color: var(--deep-red); }
+.map-address-text { font-size: 0.82rem; color: var(--black); opacity: 0.75; }
+.map-dir-btns { display: flex; gap: 8px; }
+.map-dir-btn {
+  display: inline-block;
+  padding: 5px 12px;
+  border-radius: 4px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  background: var(--red);
+  color: var(--white);
+  transition: var(--transition);
+  white-space: nowrap;
+}
+.map-dir-btn:hover { background: var(--deep-red); transform: translateY(-1px); }
+.map-dir-btn--apple { background: transparent; color: var(--red); border: 1.5px solid var(--red); }
+.map-dir-btn--apple:hover { background: var(--red); color: var(--white); }
 
 /* ── Social Buttons ─────────────────────────────────────────── */
 .footer-social { display: flex; gap: 10px; margin-top: 14px; }
