@@ -5,7 +5,7 @@ const CONTACT_DETAILS: ContactDetail[] = [
     id: 'address',
     icon: '📍',
     heading: 'Temple Address',
-    lines: ['मिथिला दुर्गामंदिर', 'Mithila Jan Kalyan Samiti', 'Mithila Region, Bihar, India'],
+    lines: ['Q Block, Mangolpuri', 'New Delhi – 110 083', 'Near Mangolpuri Metro Station'],
   },
   {
     id: 'phone',
