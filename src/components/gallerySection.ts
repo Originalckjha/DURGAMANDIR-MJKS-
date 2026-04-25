@@ -1,20 +1,20 @@
 import type { GalleryItem } from '../types.ts';
-import { createLotusArt, createDurgaArt, createMandalaArt } from './svgArt.ts';
+import { createLotusArt, createDurgaArt, createTreeOfLifeArt } from './svgArt.ts';
 
 const GALLERY_ITEMS: GalleryItem[] = [
-  { id: 'g1', theme: 'durga',         titleHindi: 'माता दुर्गा',         titleEnglish: 'Mata Durga',          description: 'The divine mother — painted in traditional Madhubani style.',                  colors: ['#B5121B','#D4A017','#1A0A00'] },
-  { id: 'g2', theme: 'lotus',         titleHindi: 'कमल पुष्प',           titleEnglish: 'Sacred Lotus',        description: 'Symbol of purity and divine grace in Mithila tradition.',                     colors: ['#D4A017','#B5121B','#2D6A2D'] },
-  { id: 'g3', theme: 'tree-of-life',  titleHindi: 'जीवन वृक्ष',          titleEnglish: 'Tree of Life',        description: 'The cosmic tree — a central motif in Mithila painting.',                      colors: ['#2D6A2D','#D4A017','#B5121B'] },
-  { id: 'g4', theme: 'fish',          titleHindi: 'मत्स्य',              titleEnglish: 'Matsya — Sacred Fish', description: 'The fish (Matsya) is the most sacred symbol of Mithila culture.',              colors: ['#1A3A6B','#D4A017','#B5121B'] },
-  { id: 'g5', theme: 'kohbar',        titleHindi: 'कोहबर कला',           titleEnglish: 'Kohbar Art',          description: 'Bridal chamber art — painted on auspicious occasions.',                        colors: ['#E8650A','#D4A017','#B5121B'] },
-  { id: 'g6', theme: 'sun-moon',      titleHindi: 'सूर्य-चंद्र',          titleEnglish: 'Sun & Moon',          description: 'Celestial bodies — symbols of eternal time in Madhubani tradition.',             colors: ['#FFD700','#1A3A6B','#B5121B'] },
+  { id: 'g1', theme: 'durga',         titleHindi: 'माता दुर्गा',         titleEnglish: 'Mata Durga',          description: 'The divine mother — painted in traditional Madhubani style with four arms, crown, and sacred lotus base.',  colors: ['#B5121B','#D4A017','#1A0A00'] },
+  { id: 'g2', theme: 'lotus',         titleHindi: 'कमल पुष्प',           titleEnglish: 'Sacred Lotus',        description: 'Symbol of purity and divine grace — the lotus blooms unstained from muddy waters, a timeless Mithila motif.', colors: ['#D4A017','#B5121B','#2D6A2D'] },
+  { id: 'g3', theme: 'tree-of-life',  titleHindi: 'जीवन वृक्ष',          titleEnglish: 'Tree of Life',        description: 'The cosmic tree connecting earth and sky — a central motif in Mithila painting, symbolising life and renewal.', colors: ['#2D6A2D','#D4A017','#B5121B'] },
+  { id: 'g4', theme: 'fish',          titleHindi: 'मत्स्य',              titleEnglish: 'Matsya — Sacred Fish', description: 'The fish (Matsya) is the most sacred symbol of Mithila culture, signifying prosperity, fertility, and life.', colors: ['#1A3A6B','#D4A017','#B5121B'] },
+  { id: 'g5', theme: 'kohbar',        titleHindi: 'कोहबर कला',           titleEnglish: 'Kohbar Art',          description: 'Bridal chamber art — painted by Mithila women for weddings, symbolising fertility, union, and cosmic energy.',  colors: ['#E8650A','#D4A017','#B5121B'] },
+  { id: 'g6', theme: 'sun-moon',      titleHindi: 'सूर्य-चंद्र',          titleEnglish: 'Sun & Moon',          description: 'Celestial bodies — Surya and Chandra — symbols of eternal time, balance, and the cosmic rhythm in Madhubani art.', colors: ['#FFD700','#1A3A6B','#B5121B'] },
 ];
 
 function buildArtForTheme(item: GalleryItem): string {
   switch (item.theme) {
     case 'durga':        return createDurgaArt();
     case 'lotus':        return createLotusArt();
-    case 'tree-of-life': return createMandalaArt();
+    case 'tree-of-life': return createTreeOfLifeArt();
     case 'fish':         return buildFishPanel(item.colors);
     case 'kohbar':       return buildKohbarArt(item.colors);
     case 'sun-moon':     return buildSunMoonArt();
@@ -91,19 +91,80 @@ function buildSunMoonArt(): string {
 
 function renderCard(item: GalleryItem): string {
   return `
-    <div class="gallery-card fade-in" role="button" tabindex="0" aria-label="${item.titleEnglish}">
+    <div class="gallery-card fade-in" role="button" tabindex="0" aria-label="View ${item.titleEnglish}" data-gallery-id="${item.id}">
       <div class="gallery-art">${buildArtForTheme(item)}</div>
+      <div class="gallery-card-overlay" aria-hidden="true">
+        <span>${item.titleHindi}</span>
+        <p>${item.description}</p>
+        <span class="gallery-expand-hint">Click to expand ↗</span>
+      </div>
       <div class="gallery-caption">
         <h4>${item.titleHindi}</h4>
-        <p>${item.description}</p>
+        <p>${item.titleEnglish}</p>
       </div>
     </div>`;
+}
+
+function buildLightbox(): void {
+  const overlay = document.createElement('div');
+  overlay.className = 'lightbox-overlay';
+  overlay.id = 'galleryLightbox';
+  overlay.setAttribute('role', 'dialog');
+  overlay.setAttribute('aria-modal', 'true');
+  overlay.setAttribute('aria-label', 'Gallery artwork viewer');
+  overlay.innerHTML = `
+    <button class="lightbox-close" id="lightboxClose" aria-label="Close">×</button>
+    <div class="lightbox-box">
+      <div class="lightbox-art" id="lightboxArt"></div>
+      <div class="lightbox-caption">
+        <h3 id="lightboxTitle"></h3>
+        <p id="lightboxDesc"></p>
+        <div class="lightbox-nav">
+          <button id="lightboxPrev">← Previous</button>
+          <button id="lightboxNext">Next →</button>
+        </div>
+      </div>
+    </div>`;
+  document.body.appendChild(overlay);
+}
+
+let currentIndex = 0;
+
+function openLightbox(index: number): void {
+  currentIndex = (index + GALLERY_ITEMS.length) % GALLERY_ITEMS.length;
+  const item = GALLERY_ITEMS[currentIndex];
+  const overlay = document.getElementById('galleryLightbox');
+  const artEl   = document.getElementById('lightboxArt');
+  const titleEl = document.getElementById('lightboxTitle');
+  const descEl  = document.getElementById('lightboxDesc');
+  if (!overlay || !artEl || !titleEl || !descEl) return;
+  artEl.innerHTML   = buildArtForTheme(item);
+  titleEl.textContent = `${item.titleHindi} — ${item.titleEnglish}`;
+  descEl.textContent  = item.description;
+  overlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
+  document.getElementById('lightboxClose')?.focus();
+}
+
+function closeLightbox(): void {
+  const overlay = document.getElementById('galleryLightbox');
+  overlay?.classList.remove('open');
+  document.body.style.overflow = '';
 }
 
 export function initGallerySection(): void {
   const grid = document.getElementById('galleryGrid');
   if (!grid) return;
   grid.innerHTML = GALLERY_ITEMS.map(renderCard).join('');
+  buildLightbox();
+
+  grid.addEventListener('click', (e: MouseEvent) => {
+    const card = (e.target as Element).closest<HTMLElement>('.gallery-card');
+    if (!card) return;
+    const id = card.dataset.galleryId;
+    const idx = GALLERY_ITEMS.findIndex(item => item.id === id);
+    if (idx !== -1) openLightbox(idx);
+  });
 
   grid.addEventListener('keydown', (e: KeyboardEvent) => {
     if (e.key !== 'Enter' && e.key !== ' ') return;
@@ -112,5 +173,21 @@ export function initGallerySection(): void {
       e.preventDefault();
       card.click();
     }
+  });
+
+  document.getElementById('lightboxClose')?.addEventListener('click', closeLightbox);
+  document.getElementById('lightboxPrev')?.addEventListener('click', () => openLightbox(currentIndex - 1));
+  document.getElementById('lightboxNext')?.addEventListener('click', () => openLightbox(currentIndex + 1));
+
+  document.getElementById('galleryLightbox')?.addEventListener('click', (e: MouseEvent) => {
+    if ((e.target as Element).id === 'galleryLightbox') closeLightbox();
+  });
+
+  document.addEventListener('keydown', (e: KeyboardEvent) => {
+    const overlay = document.getElementById('galleryLightbox');
+    if (!overlay?.classList.contains('open')) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft')  openLightbox(currentIndex - 1);
+    if (e.key === 'ArrowRight') openLightbox(currentIndex + 1);
   });
 }

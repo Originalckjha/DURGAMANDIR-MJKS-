@@ -632,3 +632,332 @@ img { display: block; max-width: 100%; }
 /* ── Scroll Animation ───────────────────────────────────────── */
 .fade-in { opacity: 0; transform: translateY(28px); transition: opacity 0.6s ease, transform 0.6s ease; }
 .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+/* stagger children */
+.puja-grid .fade-in:nth-child(1)  { transition-delay: 0.05s; }
+.puja-grid .fade-in:nth-child(2)  { transition-delay: 0.10s; }
+.puja-grid .fade-in:nth-child(3)  { transition-delay: 0.15s; }
+.puja-grid .fade-in:nth-child(4)  { transition-delay: 0.20s; }
+.puja-grid .fade-in:nth-child(5)  { transition-delay: 0.25s; }
+.puja-grid .fade-in:nth-child(6)  { transition-delay: 0.30s; }
+.puja-grid .fade-in:nth-child(7)  { transition-delay: 0.35s; }
+.puja-grid .fade-in:nth-child(8)  { transition-delay: 0.40s; }
+.gallery-grid .fade-in:nth-child(1) { transition-delay: 0.05s; }
+.gallery-grid .fade-in:nth-child(2) { transition-delay: 0.12s; }
+.gallery-grid .fade-in:nth-child(3) { transition-delay: 0.19s; }
+.gallery-grid .fade-in:nth-child(4) { transition-delay: 0.26s; }
+.gallery-grid .fade-in:nth-child(5) { transition-delay: 0.33s; }
+.gallery-grid .fade-in:nth-child(6) { transition-delay: 0.40s; }
+.festivals-grid .fade-in:nth-child(n) { transition-delay: calc(var(--i, 0) * 0.07s); }
+
+/* ── Skip Navigation ────────────────────────────────────────── */
+.skip-nav {
+  position: absolute;
+  top: -9999px;
+  left: 16px;
+  z-index: 10000;
+  background: var(--deep-red);
+  color: var(--bright-gold);
+  padding: 8px 18px;
+  border-radius: 0 0 6px 6px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  transition: top 0.2s;
+}
+.skip-nav:focus { top: 0; }
+
+/* ── Scroll Progress Bar ────────────────────────────────────── */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 0%;
+  height: 3px;
+  background: linear-gradient(90deg, var(--red), var(--gold), var(--green));
+  z-index: 10001;
+  transition: width 0.1s linear;
+}
+
+/* ── Focus Visible ──────────────────────────────────────────── */
+:focus-visible {
+  outline: 3px solid var(--gold);
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+a:focus-visible, button:focus-visible { outline-color: var(--red); }
+
+/* ── Gallery Lightbox ───────────────────────────────────────── */
+.lightbox-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 5000;
+  background: rgba(26, 10, 0, 0.88);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  backdrop-filter: blur(4px);
+}
+.lightbox-overlay.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+.lightbox-box {
+  background: var(--light-cream);
+  border: 3px solid var(--gold);
+  border-radius: 12px;
+  max-width: 520px;
+  width: 100%;
+  box-shadow: 0 24px 72px rgba(0,0,0,0.5);
+  overflow: hidden;
+  transform: scale(0.9);
+  transition: transform 0.3s ease;
+}
+.lightbox-overlay.open .lightbox-box {
+  transform: scale(1);
+}
+.lightbox-art {
+  width: 100%;
+  aspect-ratio: 4/3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--cream);
+}
+.lightbox-caption {
+  padding: 20px 24px 24px;
+  border-top: 2px solid var(--gold);
+}
+.lightbox-caption h3 {
+  font-family: var(--font-devanagari);
+  color: var(--deep-red);
+  font-size: 1.3rem;
+  margin-bottom: 6px;
+}
+.lightbox-caption p {
+  font-size: 1rem;
+  opacity: 0.82;
+  line-height: 1.6;
+  margin-bottom: 16px;
+}
+.lightbox-close {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  background: none;
+  border: none;
+  color: var(--bright-gold);
+  font-size: 2rem;
+  cursor: pointer;
+  line-height: 1;
+  transition: var(--transition);
+}
+.lightbox-close:hover { color: var(--white); transform: scale(1.15); }
+.lightbox-nav {
+  display: flex;
+  gap: 12px;
+  justify-content: flex-end;
+}
+.lightbox-nav button {
+  padding: 8px 20px;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 600;
+  border-radius: 4px;
+  cursor: pointer;
+  border: 2px solid var(--red);
+  background: transparent;
+  color: var(--red);
+  transition: var(--transition);
+}
+.lightbox-nav button:hover {
+  background: var(--red);
+  color: var(--white);
+}
+
+/* ── Puja Current Highlight ─────────────────────────────────── */
+.puja-card.puja-current {
+  border-color: var(--bright-gold);
+  background: rgba(255,215,0,0.15);
+  box-shadow: 0 0 0 3px rgba(255,215,0,0.4), 0 8px 24px rgba(0,0,0,0.3);
+  position: relative;
+}
+.puja-card.puja-current::before {
+  content: '▶ Now';
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--bright-gold);
+  color: var(--deep-red);
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 2px 10px;
+  border-radius: 20px;
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+}
+
+/* ── About Stats Counter ─────────────────────────────────────── */
+@keyframes countUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.stat-num.counted { animation: countUp 0.6s ease forwards; }
+.about-stats {
+  border-top: 2px solid rgba(181,18,27,0.15);
+  padding-top: 24px;
+}
+.stat {
+  background: var(--white);
+  border: 2px solid rgba(212,160,23,0.4);
+  border-radius: var(--radius);
+  padding: 14px 20px;
+  min-width: 100px;
+  transition: var(--transition);
+}
+.stat:hover {
+  border-color: var(--gold);
+  box-shadow: 0 4px 16px rgba(212,160,23,0.2);
+  transform: translateY(-2px);
+}
+
+/* ── Gallery Card: Overlay ───────────────────────────────────── */
+.gallery-card { position: relative; }
+.gallery-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(123,13,13,0.92) 0%, rgba(123,13,13,0.4) 50%, transparent 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 16px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+.gallery-card:hover .gallery-card-overlay,
+.gallery-card:focus .gallery-card-overlay {
+  opacity: 1;
+}
+.gallery-card-overlay p {
+  color: var(--cream);
+  font-size: 0.85rem;
+  line-height: 1.5;
+  margin: 0;
+}
+.gallery-card-overlay span {
+  color: var(--bright-gold);
+  font-family: var(--font-devanagari);
+  font-size: 1rem;
+  font-weight: 700;
+  display: block;
+  margin-bottom: 4px;
+}
+.gallery-expand-hint {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 0.75rem;
+  color: rgba(253,246,227,0.7);
+  letter-spacing: 0.06em;
+}
+
+/* ── Topbar enhancement ─────────────────────────────────────── */
+.topbar { position: relative; overflow: hidden; }
+
+/* ── Section background patterns ───────────────────────────── */
+.puja {
+  background:
+    radial-gradient(ellipse at 0% 50%, rgba(255,215,0,0.06) 0%, transparent 60%),
+    radial-gradient(ellipse at 100% 50%, rgba(255,215,0,0.06) 0%, transparent 60%),
+    var(--deep-red);
+}
+
+.gallery {
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Ccircle cx='20' cy='20' r='1' fill='%23B5121B' opacity='0.1'/%3E%3C/svg%3E"),
+    var(--cream);
+}
+
+/* ── Maithili quote enhancement ─────────────────────────────── */
+.maithili-quote {
+  position: relative;
+}
+.maithili-quote::before {
+  content: '"';
+  position: absolute;
+  top: -10px;
+  left: 10px;
+  font-size: 4rem;
+  color: var(--gold);
+  opacity: 0.3;
+  font-family: Georgia, serif;
+  line-height: 1;
+}
+
+/* ── Festival badge for main festivals ──────────────────────── */
+.festival-main { position: relative; }
+.festival-main::after {
+  content: '★ Featured';
+  position: absolute;
+  top: -10px;
+  right: 14px;
+  background: var(--gold);
+  color: var(--deep-red);
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 2px 10px;
+  border-radius: 20px;
+  letter-spacing: 0.05em;
+}
+
+/* ── Samiti list icon enhancement ───────────────────────────── */
+.samiti-list li { transition: var(--transition); }
+.samiti-list li:hover {
+  border-left-color: var(--gold);
+  background: var(--cream);
+  transform: translateX(4px);
+}
+
+/* ── Footer links hover ─────────────────────────────────────── */
+.footer-links ul li a,
+.footer-culture ul li {
+  transition: var(--transition);
+  display: inline-block;
+}
+.footer-links ul li a:hover { color: var(--gold); transform: translateX(4px); }
+
+/* ── Smooth section transitions ─────────────────────────────── */
+.section { scroll-margin-top: 80px; }
+
+/* ── Dark Mode ──────────────────────────────────────────────── */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --cream:       #1E1410;
+    --light-cream: #251A14;
+    --white:       #2A1F18;
+    --black:       #F0E6D3;
+  }
+  .header { background: #1E1410; border-bottom-color: var(--red); }
+  .puja-card { background: rgba(0,0,0,0.2); }
+  .gallery-card { background: #2A1F18; }
+  .contact-form, .contact-item { background: #2A1F18; }
+  .fact-card { background: #2A1F18; }
+  .festival-card { background: #2A1F18; }
+  .stat { background: #2A1F18; }
+  .form-group input,
+  .form-group textarea { background: #1E1410; color: var(--black); }
+  .lightbox-box { background: #251A14; }
+}
+
+/* ── Print Styles ───────────────────────────────────────────── */
+@media print {
+  .topbar, .header, .hamburger, .scroll-progress,
+  #backToTop, .lightbox-overlay, .hero-buttons { display: none !important; }
+  .hero { min-height: auto; padding: 24px; }
+  .section { padding: 32px 0; }
+  body { background: white; color: black; }
+}
