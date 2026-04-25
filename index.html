@@ -3,14 +3,68 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>मिथिला दुर्गामंदिर | Mithila Durgamandir</title>
-  <meta name="description" content="Mithila Durgamandir - A sacred 80-year-old temple governed by Mithila Jan Kalyan Samiti, celebrating Mithila culture, Maithili language, and heritage." />
+  <title>मिथिला दुर्गामंदिर | Mithila Durgamandir — Mithila Jan Kalyan Samiti</title>
+  <meta name="description" content="Mithila Durgamandir — A sacred 80-year-old temple (est. 1945) governed by Mithila Jan Kalyan Samiti, celebrating Mithila culture, Maithili language, Madhubani art, and heritage." />
+  <meta name="keywords" content="Mithila Durgamandir, Mithila Temple, Mithila Jan Kalyan Samiti, Maithili, Madhubani, Durga Puja, Bihar temple, Navratri" />
+  <meta name="author" content="Mithila Jan Kalyan Samiti" />
+  <meta name="theme-color" content="#7B0D0D" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="मिथिला दुर्गामंदिर | Mithila Durgamandir" />
+  <meta property="og:description" content="A sacred 80-year-old temple celebrating Mithila culture, Maithili language, and Madhubani art tradition since 1945." />
+  <meta property="og:locale" content="mai_IN" />
+  <meta property="og:locale:alternate" content="en_IN" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="मिथिला दुर्गामंदिर | Mithila Durgamandir" />
+  <meta name="twitter:description" content="A sacred 80-year-old temple celebrating Mithila culture, Maithili language, and Madhubani art tradition since 1945." />
+
+  <!-- Favicon (inline SVG) -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%237B0D0D' rx='12'/><text y='78' x='50' text-anchor='middle' font-size='68'>🔱</text></svg>" />
+
+  <!-- JSON-LD Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HinduTemple",
+    "name": "मिथिला दुर्गामंदिर",
+    "alternateName": "Mithila Durgamandir",
+    "description": "A sacred 80-year-old temple governed by Mithila Jan Kalyan Samiti, celebrating Mithila culture, Maithili language, and Madhubani art tradition since 1945.",
+    "foundingDate": "1945",
+    "address": {
+      "@type": "PostalAddress",
+      "addressRegion": "Bihar",
+      "addressCountry": "IN"
+    },
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+        "opens": "05:00",
+        "closes": "12:00"
+      },
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+        "opens": "16:00",
+        "closes": "21:00"
+      }
+    ],
+    "telephone": "+91-XXXXX-XXXXX",
+    "email": "info@durgamandir-mjks.org"
+  }
+  </script>
+
   <link rel="stylesheet" href="css/style.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Hindi:ital@0;1&family=Cinzel+Decorative:wght@400;700&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet" />
 </head>
 <body>
+  <a href="#main-content" class="skip-nav">Skip to main content</a>
+  <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
 
   <!-- ===== TOP BAR ===== -->
   <div class="topbar">
@@ -47,6 +101,7 @@
   </header>
 
   <!-- ===== HERO ===== -->
+  <main id="main-content">
   <section class="hero" id="home">
     <div class="mithila-border-top"></div>
     <div class="hero-content">
@@ -243,6 +298,8 @@
     </div>
   </section>
 
+  </main><!-- /#main-content -->
+
   <!-- ===== FOOTER ===== -->
   <footer class="footer">
     <div class="mithila-border-top"></div>
@@ -284,7 +341,7 @@
         </div>
       </div>
       <div class="footer-bottom">
-        <p>© 2025 मिथिला दुर्गामंदिर | Mithila Jan Kalyan Samiti. All rights reserved.</p>
+        <p>© <span id="footerYear">2025</span> मिथिला दुर्गामंदिर | Mithila Jan Kalyan Samiti. All rights reserved.</p>
         <p>Built with devotion 🙏 — Jai Mata Durga</p>
       </div>
     </div>

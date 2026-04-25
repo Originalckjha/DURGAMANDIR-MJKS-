@@ -126,18 +126,91 @@ export function createMandalaArt(): string {
   const petalCounts = [16, 12, 8, 6];
   return `<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
     <rect width="200" height="200" fill="${PALETTE.bg}"/>
+    <!-- outer decorative ring -->
+    <circle cx="100" cy="100" r="94" fill="none" stroke="${PALETTE.secondary}" stroke-width="2" stroke-dasharray="4 3" opacity="0.5"/>
     ${rings.map((r, ri) =>
       Array.from({ length: petalCounts[ri] }, (_, i) => {
         const a = (i / petalCounts[ri]) * Math.PI * 2;
         const x = 100 + r * Math.cos(a);
         const y = 100 + r * Math.sin(a);
         const colors = [PALETTE.primary, PALETTE.secondary, PALETTE.accent, '#1A3A6B'];
-        return `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${6 - ri}"
+        const size = 6 - ri;
+        return `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${size}"
           fill="${colors[ri]}" stroke="${PALETTE.outline}" stroke-width="0.8"/>`;
       }).join('')
     ).join('')}
-    <circle cx="100" cy="100" r="14" fill="${PALETTE.primary}" stroke="${PALETTE.outline}" stroke-width="2"/>
-    <text x="100" y="105" text-anchor="middle" font-size="14"
+    <!-- spokes -->
+    ${Array.from({length: 8}, (_, i) => {
+      const a = (i / 8) * Math.PI * 2;
+      const x2 = (100 + 85 * Math.cos(a)).toFixed(1);
+      const y2 = (100 + 85 * Math.sin(a)).toFixed(1);
+      return `<line x1="100" y1="100" x2="${x2}" y2="${y2}" stroke="${PALETTE.secondary}" stroke-width="0.5" opacity="0.3"/>`;
+    }).join('')}
+    <circle cx="100" cy="100" r="18" fill="${PALETTE.primary}" stroke="${PALETTE.outline}" stroke-width="2"/>
+    <circle cx="100" cy="100" r="10" fill="${PALETTE.secondary}" stroke="${PALETTE.outline}" stroke-width="1.5"/>
+    <text x="100" y="105" text-anchor="middle" font-size="11"
       fill="${PALETTE.bg}" font-family="serif">ॐ</text>
+  </svg>`;
+}
+
+export function createTreeOfLifeArt(): string {
+  const branchColor = '#2D6A2D';
+  const trunkColor  = '#7B4A1E';
+  const leafColors  = [PALETTE.primary, PALETTE.secondary, PALETTE.accent, '#E8650A', '#1A3A6B'];
+
+  const branches = [
+    // trunk
+    `<line x1="100" y1="190" x2="100" y2="130" stroke="${trunkColor}" stroke-width="7" stroke-linecap="round"/>`,
+    // main branches
+    `<line x1="100" y1="155" x2="55"  y2="115" stroke="${branchColor}" stroke-width="4.5" stroke-linecap="round"/>`,
+    `<line x1="100" y1="155" x2="145" y2="115" stroke="${branchColor}" stroke-width="4.5" stroke-linecap="round"/>`,
+    `<line x1="100" y1="135" x2="70"  y2="95"  stroke="${branchColor}" stroke-width="3.5" stroke-linecap="round"/>`,
+    `<line x1="100" y1="135" x2="130" y2="95"  stroke="${branchColor}" stroke-width="3.5" stroke-linecap="round"/>`,
+    `<line x1="100" y1="130" x2="100" y2="80"  stroke="${branchColor}" stroke-width="3"   stroke-linecap="round"/>`,
+    // sub-branches left
+    `<line x1="55"  y1="115" x2="30"  y2="85"  stroke="${branchColor}" stroke-width="2.5" stroke-linecap="round"/>`,
+    `<line x1="55"  y1="115" x2="55"  y2="78"  stroke="${branchColor}" stroke-width="2.5" stroke-linecap="round"/>`,
+    `<line x1="70"  y1="95"  x2="50"  y2="65"  stroke="${branchColor}" stroke-width="2"   stroke-linecap="round"/>`,
+    `<line x1="70"  y1="95"  x2="80"  y2="65"  stroke="${branchColor}" stroke-width="2"   stroke-linecap="round"/>`,
+    // sub-branches right
+    `<line x1="145" y1="115" x2="170" y2="85"  stroke="${branchColor}" stroke-width="2.5" stroke-linecap="round"/>`,
+    `<line x1="145" y1="115" x2="145" y2="78"  stroke="${branchColor}" stroke-width="2.5" stroke-linecap="round"/>`,
+    `<line x1="130" y1="95"  x2="150" y2="65"  stroke="${branchColor}" stroke-width="2"   stroke-linecap="round"/>`,
+    `<line x1="130" y1="95"  x2="120" y2="65"  stroke="${branchColor}" stroke-width="2"   stroke-linecap="round"/>`,
+  ];
+
+  const leaves: [number, number, number, number][] = [
+    [30,85,9,0],[55,78,9,1],[50,65,8,2],[80,65,8,3],[100,80,10,4],
+    [120,65,8,0],[150,65,8,1],[145,78,9,2],[170,85,9,3],
+    [100,50,11,0],[75,45,8,1],[125,45,8,2],
+    // small top leaves
+    [90,32,7,3],[110,32,7,4],[100,22,8,1],
+  ];
+
+  const svgLeaves = leaves.map(([cx, cy, r, ci]) =>
+    `<circle cx="${cx}" cy="${cy}" r="${r}" fill="${leafColors[ci % leafColors.length]}" stroke="${PALETTE.outline}" stroke-width="1" opacity="0.85"/>`
+  ).join('');
+
+  // roots
+  const roots = [
+    `<line x1="100" y1="190" x2="70"  y2="210" stroke="${trunkColor}" stroke-width="3.5" stroke-linecap="round"/>`,
+    `<line x1="100" y1="190" x2="130" y2="210" stroke="${trunkColor}" stroke-width="3.5" stroke-linecap="round"/>`,
+    `<line x1="100" y1="195" x2="100" y2="215" stroke="${trunkColor}" stroke-width="3"   stroke-linecap="round"/>`,
+    `<line x1="70"  y1="210" x2="50"  y2="225" stroke="${trunkColor}" stroke-width="2"   stroke-linecap="round"/>`,
+    `<line x1="130" y1="210" x2="150" y2="225" stroke="${trunkColor}" stroke-width="2"   stroke-linecap="round"/>`,
+  ];
+
+  return `<svg viewBox="0 0 200 240" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+    <rect width="200" height="240" fill="${PALETTE.bg}"/>
+    <rect x="4" y="4" width="192" height="232" rx="4" fill="none" stroke="${PALETTE.primary}" stroke-width="2"/>
+    <!-- ground line -->
+    <line x1="20" y1="200" x2="180" y2="200" stroke="${trunkColor}" stroke-width="1.5" opacity="0.4"/>
+    ${roots.join('')}
+    ${branches.join('')}
+    ${svgLeaves}
+    <!-- small birds -->
+    <path d="M36,55 Q40,50 44,55" stroke="${PALETTE.outline}" stroke-width="1.5" fill="none"/>
+    <path d="M156,60 Q160,55 164,60" stroke="${PALETTE.outline}" stroke-width="1.5" fill="none"/>
+    <text x="100" y="235" text-anchor="middle" font-family="serif" font-size="10" fill="${PALETTE.primary}">जीवन वृक्ष</text>
   </svg>`;
 }

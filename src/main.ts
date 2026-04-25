@@ -74,7 +74,9 @@ function initPageLoader(): void {
     <div style="font-family:'Tiro Devanagari Hindi',serif; color:#FFD700; font-size:1.4rem; letter-spacing:0.06em;">
       जय माता दुर्गा
     </div>
-    <div style="color:#E8D9B0; font-size:0.9rem; opacity:0.75;">Loading...</div>
+    <div style="color:#E8D9B0; font-size:0.9rem; opacity:0.75; font-family:'Crimson Text',serif;">
+      Mithila Durgamandir — Est. 1945
+    </div>
     <style>@keyframes spin { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }</style>
   `;
   document.body.prepend(loader);
@@ -83,6 +85,61 @@ function initPageLoader(): void {
     loader.style.opacity = '0';
     setTimeout(() => loader.remove(), 650);
   });
+}
+
+function initScrollProgress(): void {
+  const bar = document.getElementById('scrollProgress');
+  if (!bar) return;
+  let rafPending = false;
+  window.addEventListener('scroll', () => {
+    if (rafPending) return;
+    rafPending = true;
+    requestAnimationFrame(() => {
+      rafPending = false;
+      const scrollTop    = window.scrollY;
+      const docHeight    = document.documentElement.scrollHeight - window.innerHeight;
+      const pct          = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+      bar.style.width    = `${pct}%`;
+    });
+  });
+}
+
+function animateCounter(el: HTMLElement, target: number, duration = 1200): void {
+  const start = performance.now();
+  const update = (now: number) => {
+    const elapsed  = now - start;
+    const progress = Math.min(elapsed / duration, 1);
+    const eased    = 1 - Math.pow(1 - progress, 3);
+    el.textContent = Math.round(eased * target).toString() + (target >= 1000 ? '' : '+');
+    if (progress < 1) requestAnimationFrame(update);
+  };
+  requestAnimationFrame(update);
+}
+
+function initStatCounters(): void {
+  const statEls = document.querySelectorAll<HTMLElement>('.stat-num');
+  const targets: Record<string, number> = { '80+': 80, '1945': 1945, '365': 365 };
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const el   = entry.target as HTMLElement;
+      const text = el.textContent ?? '';
+      const key  = Object.keys(targets).find(k => text.includes(k.replace('+', '')));
+      if (key) {
+        el.classList.add('counted');
+        animateCounter(el, targets[key]);
+      }
+      observer.unobserve(el);
+    });
+  }, { threshold: 0.5 });
+
+  statEls.forEach(el => observer.observe(el));
+}
+
+function initFooterYear(): void {
+  const el = document.getElementById('footerYear');
+  if (el) el.textContent = new Date().getFullYear().toString();
 }
 
 function initHeroLotusDecor(): void {
@@ -114,6 +171,9 @@ document.addEventListener('DOMContentLoaded', () => {
   initContactSection();
   initHeroLotusDecor();
   initBackToTop();
+  initScrollProgress();
+  initStatCounters();
+  initFooterYear();
 
   // scroll animations run after a tick so elements are painted first
   requestAnimationFrame(initScrollAnimations);
