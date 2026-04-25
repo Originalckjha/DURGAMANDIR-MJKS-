@@ -2,7 +2,7 @@ import type { GalleryItem } from '../types.ts';
 import { createLotusArt, createDurgaArt, createMandalaArt } from './svgArt.ts';
 
 const GALLERY_ITEMS: GalleryItem[] = [
-  { id: 'g1', theme: 'durga',         titleHindi: 'माँ दुर्गा',          titleEnglish: 'Maa Durga',           description: 'The divine mother — painted in traditional Madhubani style.',                  colors: ['#B5121B','#D4A017','#1A0A00'] },
+  { id: 'g1', theme: 'durga',         titleHindi: 'माता दुर्गा',         titleEnglish: 'Mata Durga',          description: 'The divine mother — painted in traditional Madhubani style.',                  colors: ['#B5121B','#D4A017','#1A0A00'] },
   { id: 'g2', theme: 'lotus',         titleHindi: 'कमल पुष्प',           titleEnglish: 'Sacred Lotus',        description: 'Symbol of purity and divine grace in Mithila tradition.',                     colors: ['#D4A017','#B5121B','#2D6A2D'] },
   { id: 'g3', theme: 'tree-of-life',  titleHindi: 'जीवन वृक्ष',          titleEnglish: 'Tree of Life',        description: 'The cosmic tree — a central motif in Mithila painting.',                      colors: ['#2D6A2D','#D4A017','#B5121B'] },
   { id: 'g4', theme: 'fish',          titleHindi: 'मत्स्य',              titleEnglish: 'Matsya — Sacred Fish', description: 'The fish (Matsya) is the most sacred symbol of Mithila culture.',              colors: ['#1A3A6B','#D4A017','#B5121B'] },

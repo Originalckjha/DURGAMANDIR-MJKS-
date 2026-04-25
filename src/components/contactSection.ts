@@ -83,7 +83,7 @@ export function initContactSection(): void {
     }
 
     const success = document.getElementById('formSuccess');
-    if (success) success.textContent = '🙏 Thank you! Your message has been received. Jai Maa Durga!';
+    if (success) success.textContent = '🙏 Thank you! Your message has been received. Jai Mata Durga!';
     form.reset();
   });
 }
