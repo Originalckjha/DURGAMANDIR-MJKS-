@@ -21,7 +21,6 @@
   --font-devanagari: 'Tiro Devanagari Hindi', serif;
   --font-display:    'Cinzel Decorative', serif;
   --font-body:       'Crimson Text', Georgia, serif;
-  --font-tirhuta:    'Noto Serif Tirhuta', serif;
 
   --shadow: 0 4px 24px rgba(181,18,27,0.15);
   --radius: 8px;
@@ -136,12 +135,13 @@ img { display: block; max-width: 100%; }
   color: var(--deep-red);
   line-height: 1.2;
 }
-.logo-tirhuta {
-  font-family: var(--font-tirhuta);
-  font-size: 0.88rem;
-  color: var(--deep-red);
-  letter-spacing: 0.05em;
-  line-height: 1.4;
+.logo-lang {
+  font-family: var(--font-devanagari);
+  font-size: 0.8rem;
+  color: var(--gold);
+  letter-spacing: 0.18em;
+  line-height: 1.3;
+  font-style: italic;
 }
 .logo-subtitle {
   font-size: 0.75rem;
@@ -212,17 +212,18 @@ img { display: block; max-width: 100%; }
   font-family: var(--font-devanagari);
   font-size: 1.05rem;
   color: var(--deep-red);
-  margin-bottom: 12px;
+  margin-bottom: 14px;
   font-style: italic;
   opacity: 0.9;
 }
-.hero-tirhuta {
-  font-family: var(--font-tirhuta);
-  font-size: clamp(1.1rem, 2.2vw, 1.6rem);
-  color: var(--deep-red);
-  margin-bottom: 10px;
-  opacity: 0.8;
-  letter-spacing: 0.06em;
+.hero-lang {
+  font-family: var(--font-devanagari);
+  font-size: clamp(1rem, 1.8vw, 1.3rem);
+  color: var(--gold);
+  margin-bottom: 8px;
+  letter-spacing: 0.22em;
+  font-style: italic;
+  opacity: 0.9;
 }
 .hero-title {
   font-family: var(--font-devanagari);
@@ -520,8 +521,8 @@ img { display: block; max-width: 100%; }
   gap: 40px;
   margin-bottom: 40px;
 }
-.footer-logo { font-family: var(--font-devanagari); font-size: 1.3rem; color: var(--bright-gold); margin-bottom: 6px; }
-.footer-tirhuta { font-family: var(--font-tirhuta); font-size: 0.95rem; color: var(--gold); margin-bottom: 8px; opacity: 0.85; }
+.footer-logo { font-family: var(--font-devanagari); font-size: 1.3rem; color: var(--bright-gold); margin-bottom: 4px; }
+.footer-lang { font-family: var(--font-devanagari); font-size: 0.85rem; color: var(--gold); margin-bottom: 8px; letter-spacing: 0.18em; font-style: italic; opacity: 0.85; }
 .footer-brand p { font-size: 0.9rem; opacity: 0.75; line-height: 1.6; }
 .footer-mantra { font-family: var(--font-devanagari); color: var(--gold); font-size: 1.1rem; margin-top: 10px !important; }
 .footer-links h4,
@@ -548,11 +549,70 @@ img { display: block; max-width: 100%; }
   line-height: 1.8;
 }
 
+/* ── Maithili Article ───────────────────────────────────────── */
+.maithili-article { background: var(--light-cream); }
+.maithili-layout {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 52px;
+  align-items: start;
+}
+.maithili-text h3 {
+  font-family: var(--font-display);
+  color: var(--deep-red);
+  font-size: 1.1rem;
+  margin: 28px 0 10px;
+}
+.maithili-text h3:first-child { margin-top: 0; }
+.maithili-text p { margin-bottom: 14px; font-size: 1.05rem; line-height: 1.82; }
+.maithili-quote {
+  border-left: 4px solid var(--gold);
+  padding: 18px 22px;
+  background: var(--cream);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  margin: 24px 0;
+  font-family: var(--font-devanagari);
+  font-size: 1.1rem;
+  color: var(--deep-red);
+  line-height: 1.8;
+}
+.maithili-quote p { margin: 0; }
+.maithili-quote cite {
+  display: block;
+  margin-top: 10px;
+  font-size: 0.85rem;
+  color: var(--green);
+  font-style: italic;
+  font-family: var(--font-body);
+}
+.maithili-facts { display: flex; flex-direction: column; gap: 16px; }
+.fact-card {
+  background: var(--white);
+  border: 2px solid var(--gold);
+  border-top: 4px solid var(--red);
+  border-radius: var(--radius);
+  padding: 20px 18px;
+  box-shadow: var(--shadow);
+  transition: var(--transition);
+}
+.fact-card:hover { transform: translateY(-3px); box-shadow: 0 8px 28px rgba(181,18,27,0.15); }
+.fact-num {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  color: var(--red);
+  line-height: 1.1;
+  margin-bottom: 6px;
+}
+.fact-card h4 { font-family: var(--font-display); color: var(--deep-red); font-size: 0.88rem; margin-bottom: 6px; }
+.fact-card p { font-size: 0.88rem; opacity: 0.78; line-height: 1.6; margin: 0; }
+
 /* ── Responsive ─────────────────────────────────────────────── */
 @media (max-width: 900px) {
   .about-grid,
   .samiti-content,
-  .contact-grid { grid-template-columns: 1fr; }
+  .contact-grid,
+  .maithili-layout { grid-template-columns: 1fr; }
   .about-art,
   .samiti-art { max-width: 320px; margin: 0 auto; }
   .footer-grid { grid-template-columns: 1fr 1fr; }

@@ -8,7 +8,7 @@ const FESTIVALS: Festival[] = [
     nameEnglish: 'Sharadiya Navratri',
     month: 'Ashwin',
     dateRange: 'Oct (9 days)',
-    description: 'The grand nine-night festival of Maa Durga — the most celebrated event at our temple with special puja, jagran, and community gatherings.',
+    description: 'The grand nine-night festival of Mata Durga — the most celebrated event at our temple with special puja, jagran, and community gatherings.',
     isMain: true,
   },
   {

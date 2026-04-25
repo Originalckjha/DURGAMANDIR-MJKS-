@@ -72,7 +72,7 @@ function initPageLoader(): void {
   loader.innerHTML = `
     <div style="font-size:3.5rem; animation:spin 2s linear infinite;">🔱</div>
     <div style="font-family:'Tiro Devanagari Hindi',serif; color:#FFD700; font-size:1.4rem; letter-spacing:0.06em;">
-      जय माँ दुर्गा
+      जय माता दुर्गा
     </div>
     <div style="color:#E8D9B0; font-size:0.9rem; opacity:0.75;">Loading...</div>
     <style>@keyframes spin { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }</style>
