@@ -83,9 +83,34 @@ const FESTIVALS: Festival[] = [
   },
 ];
 
-function renderCard(f: Festival): string {
+// Approximate month order for "next upcoming" detection
+const MONTH_ORDER: Record<string, number> = {
+  Chaitra: 3, Vaishakha: 4, Jyeshtha: 5, Ashadha: 6,
+  Shravana: 7, Bhadrapada: 8, Ashwin: 9, Kartika: 10,
+  Margashirsha: 11, Pausha: 12, Magha: 1, Phalguna: 2,
+};
+
+function getNextFestivalId(): string {
+  const currentMonth = new Date().getMonth() + 1; // 1-12
+  let bestId = '';
+  let bestDiff = 13;
+  for (const f of FESTIVALS) {
+    const fMonth = MONTH_ORDER[f.month] ?? 0;
+    const diff = ((fMonth - currentMonth + 12) % 12) || 12;
+    if (diff < bestDiff) { bestDiff = diff; bestId = f.id; }
+  }
+  return bestId;
+}
+
+function renderCard(f: Festival, isNext: boolean): string {
+  const classes = [
+    'festival-card fade-in',
+    f.isMain   ? 'festival-main'     : '',
+    isNext     ? 'festival-upcoming' : '',
+  ].filter(Boolean).join(' ');
   return `
-    <div class="festival-card fade-in${f.isMain ? ' festival-main' : ''}">
+    <div class="${classes}">
+      ${isNext ? '<div class="festival-upcoming-badge">🗓 Coming Up</div>' : ''}
       <div class="festival-icon">${f.icon}</div>
       <div class="festival-name">${f.nameHindi}</div>
       <div class="festival-date">${f.nameEnglish} &nbsp;·&nbsp; ${f.dateRange}</div>
@@ -96,5 +121,6 @@ function renderCard(f: Festival): string {
 export function initFestivalsSection(): void {
   const grid = document.getElementById('festivalsGrid');
   if (!grid) return;
-  grid.innerHTML = FESTIVALS.map(renderCard).join('');
+  const nextId = getNextFestivalId();
+  grid.innerHTML = FESTIVALS.map(f => renderCard(f, f.id === nextId)).join('');
 }
