@@ -92,15 +92,17 @@ function buildSunMoonArt(): string {
 function renderCard(item: GalleryItem): string {
   return `
     <div class="gallery-card fade-in" role="button" tabindex="0" aria-label="View ${item.titleEnglish}" data-gallery-id="${item.id}">
-      <div class="gallery-art">${buildArtForTheme(item)}</div>
-      <div class="gallery-card-overlay" aria-hidden="true">
-        <span>${item.titleHindi}</span>
-        <p>${item.description}</p>
-        <span class="gallery-expand-hint">Click to expand ↗</span>
+      <div class="gallery-art">
+        ${buildArtForTheme(item)}
+        <div class="gallery-card-overlay" aria-hidden="true">
+          <span>${item.titleHindi}</span>
+          <span class="gallery-expand-hint">Click to view ↗</span>
+        </div>
       </div>
       <div class="gallery-caption">
         <h4>${item.titleHindi}</h4>
-        <p>${item.titleEnglish}</p>
+        <p class="gallery-caption-en">${item.titleEnglish}</p>
+        <p class="gallery-caption-desc">${item.description}</p>
       </div>
     </div>`;
 }
